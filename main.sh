@@ -19,8 +19,10 @@ while true; do
 
     read -r -p "Enter your choice [1-3]: " choice
 
+    choice=${choice:-1}
+  
     case "$choice" in
-        1)
+      1)
             echo "Import Faculty selected."
             ;;
         2)
