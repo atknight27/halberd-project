@@ -1,5 +1,5 @@
-#!/bin/bas
-
+#!/bin/bash
+export FACULTY_URL="https://www.tntech.edu/engineering/programs/csc/faculty-and-staff.php"
 # Halberd Technologies
 # Faculty Account Managment System
 # Main Menu
@@ -23,9 +23,12 @@ while true; do
   
     case "$choice" in
       1)
-            echo "Import Faculty selected."
-            ;;
-        2)
+          
+   	 echo "Importing faculty from website..."
+   	 bash "$(dirname "$0")/scripts/faculty_import.sh"
+	 ;;
+           
+       2)
             echo "Add User Manually selected."
             ;;
         3)
