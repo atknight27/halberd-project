@@ -159,7 +159,6 @@ while [[ "$PassChoice" != "$Password" ]]; do
     read -r -p "Enter Password: " PassChoice 
     
     if [[ "$PassChoice" != "$Password" ]]; then
-    	 echo "E"
          ((++FailedCount))
          echo "Invalid Password... Try again"
     else 
