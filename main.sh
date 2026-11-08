@@ -1,4 +1,4 @@
-#!/bin/bas
+#!/bin/bash
 
 # Halberd Technologies
 # Faculty Account Managment System
