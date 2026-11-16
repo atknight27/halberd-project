@@ -18,8 +18,11 @@ create_user() {
     local username
     local password
 
-    username="${first_name,,}.${last_name,,}"
-    password="${first_name,,}${last_name,,}HALBERD"
+    first_name="$(echo "$first_name" | xargs)"
+last_name="$(echo "$last_name" | xargs)"
+
+username="${first_name,,}.${last_name,,}"
+password="${first_name,,}${last_name,,}HALBERD"
 
     if id "$username" &>/dev/null; then
         echo "User $username already exists. Skipping."
@@ -48,7 +51,7 @@ automatic_user_creation() {
         return 1
     fi
 
-    while IFS= read -r first_name last_name; do
+    while read -r first_name last_name; do
     if ! create_user "$first_name" "$last_name"; then
         echo "Account creation stopped due to an error."
         return 1
