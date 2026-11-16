@@ -1,5 +1,6 @@
 #!/bin/bash
 export FACULTY_URL="https://www.tntech.edu/engineering/programs/csc/faculty-and-staff.php"
+source "$(dirname "$0")/account-creation.sh"
 # Halberd Technologies
 # Faculty Account Managment System
 # Main Menu
@@ -22,14 +23,14 @@ while true; do
     choice=${choice:-1}
   
     case "$choice" in
-      1)
-          
-   	 echo "Importing faculty from website..."
-   	 bash "$(dirname "$0")/scripts/faculty_import.sh"
-	 ;;
+        1)
+            echo "Importing faculty from website..."
+            automatic_user_creation
+            ;;
            
-       2)
+        2)
             echo "Add User Manually selected."
+            manual_user_creation
             ;;
         3)
             echo "Exiting HAlberd Technologies."
