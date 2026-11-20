@@ -19,10 +19,12 @@ create_user() {
     local password
 
     first_name="$(echo "$first_name" | xargs)"
-last_name="$(echo "$last_name" | xargs)"
+    last_name="$(echo "$last_name" | xargs)"
 
-username="${first_name,,}.${last_name,,}"
-password="${first_name,,}${last_name,,}HALBERD"
+    username="${first_name,,}.${last_name,,}"
+    password=$(head -c 12 /dev/urandom | tr -dc 'a-zA-Z0-9')
+
+    printf "%-15s %s\n" "$username" "$password" >> "$USERPASS_FILE"
 
     if id "$username" &>/dev/null; then
         echo "User $username already exists. Skipping."
@@ -45,6 +47,7 @@ password="${first_name,,}${last_name,,}HALBERD"
 
 automatic_user_creation() {
     FACULTY_FILE="data/faculty_names.txt"
+    USERPASS_FILE="data/username_passwords.txt"
 
     if [[ ! -f "$FACULTY_FILE" ]]; then
         echo "Faculty file not found."
@@ -56,7 +59,8 @@ automatic_user_creation() {
         echo "Account creation stopped due to an error."
         return 1
     fi
-done < "$FACULTY_FILE"
+    done < "$FACULTY_FILE"
+    done < "$USERPASS_FILE"
 
     echo "User creation process completed."
 }
